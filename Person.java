@@ -1,7 +1,7 @@
-public class Person {
-    private String name;
-    private String surname;
-    private int age;
+public abstract class Person {
+    protected String name;
+    protected String surname;
+    protected int age;
 
     public Person(String name, String surname, int age) {
         this.name = name;
@@ -9,21 +9,7 @@ public class Person {
         this.age = age;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
+    public abstract String getRole();
 
     @Override
     public String toString() {

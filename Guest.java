@@ -1,18 +1,15 @@
 public class Guest extends Person {
-    private boolean haveRoom;
     private int residenceTime;
     private Room room;
 
     public Guest(String name, String surname, int age) {
         super(name, surname, age);
-        this.haveRoom = false;
     }
 
-    public void assignRoom(Room room, int residenceTime) {
+    public void bookRoom(Room room, int days) {
         this.room = room;
-        this.residenceTime = residenceTime;
-        this.haveRoom = true;
-        room.setOwner(this);
+        this.residenceTime = days;
+        room.assignOwner(this);
     }
 
     public Room getRoom() {
@@ -20,9 +17,14 @@ public class Guest extends Person {
     }
 
     @Override
+    public String getRole() {
+        return "Guest";
+    }
+
+    @Override
     public String toString() {
         return super.toString() +
-                ", haveRoom=" + haveRoom +
-                ", residenceTime=" + residenceTime;
+                ", role=" + getRole() +
+                ", days=" + residenceTime;
     }
 }

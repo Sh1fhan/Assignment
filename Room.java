@@ -1,17 +1,19 @@
+import java.util.Objects;
+
 public class Room {
     private int roomNumber;
     private int floor;
-    private boolean isVip;
+    private boolean vip;
     private int block;
-    private boolean isAvailable;
+    private boolean available;
     private Guest owner;
 
-    public Room(int roomNumber, int floor, boolean isVip, int block) {
+    public Room(int roomNumber, int floor, boolean vip, int block) {
         this.roomNumber = roomNumber;
         this.floor = floor;
-        this.isVip = isVip;
+        this.vip = vip;
         this.block = block;
-        this.isAvailable = true;
+        this.available = true;
     }
 
     public int getRoomNumber() {
@@ -19,23 +21,44 @@ public class Room {
     }
 
     public boolean isAvailable() {
-        return isAvailable;
+        return available;
     }
 
-    public void setOwner(Guest owner) {
-        this.owner = owner;
-        this.isAvailable = (owner == null);
+    public boolean isVip() {
+        return vip;
     }
 
-    public Guest getOwner() {
-        return owner;
+    public void assignOwner(Guest guest) {
+        this.owner = guest;
+        this.available = false;
+    }
+
+    public void freeRoom() {
+        this.owner = null;
+        this.available = true;
     }
 
     @Override
     public String toString() {
-        return "Room " + roomNumber +
+        return "Room{" +
+                "number=" + roomNumber +
                 ", floor=" + floor +
-                ", VIP=" + isVip +
-                ", available=" + isAvailable;
+                ", vip=" + vip +
+                ", available=" + available +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Room)) return false;
+        Room room = (Room) o;
+        return roomNumber == room.roomNumber &&
+                block == room.block;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roomNumber, block);
     }
 }
